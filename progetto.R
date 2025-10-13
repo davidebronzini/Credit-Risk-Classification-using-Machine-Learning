@@ -12,7 +12,7 @@ Dati[Dati=="n.a."]<-NA  #the string for NAN is wrong we need to substitue it
 clean_data <- na.omit(Dati)
 summary(clean_data)
 # the purpouse is classification with 3 classes for credit score, 
- #but since i nthe data we have more than 3 classes it is necessary to convert the variable to simplify it
+ #but since in the data we have more than 3 classes it is necessary to convert the variable to simplify it
 clean_data$Score<-as.factor(clean_data$Score)
 clean_data<-clean_data %>% 
   mutate(Score=case_when(
@@ -44,7 +44,7 @@ fit <-glmnet(x, as.factor(y), family = "multinomial", alpha = 0)# we use as fact
 coef(fit) #the glmnet for logistic regression coeff given each class case
 #sparse matrix means that almost is elements is 0. This is due to regularization componet
 set.seed(17)
-cv_fit <- cv.glmnet(x, as.factor(y), family = "multinomial", alpha = 0, nfolds = 10,type="class") #specify class to have misclassifcatio nerror taye instead of deviance
+cv_fit <- cv.glmnet(x, as.factor(y), family = "multinomial", alpha = 0, nfolds = 10,type="class") #specify class to have misclassifcation error taye instead of deviance
 cv_fit# here we have minimum lambda with relative best cv error
 
 best_lambda <- cv_fit$lambda.min
@@ -200,6 +200,7 @@ boxplot(cv_errors_tot,
         main = "TEST ERRORS FOR DIFFERENT CLASSIFICATION METHODS",
         ylab = "TEST ERROR ", xlab = "METHOD",
         col = "skyblue", border = "red", notch = FALSE)
+
 
 
 
